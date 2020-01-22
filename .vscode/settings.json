@@ -1,0 +1,13 @@
+{
+    "window.zoomLevel": 1,
+    "workbench.startupEditor": "newUntitledFile",
+    "terminal.integrated.inheritEnv": false,
+    "workbench.iconTheme": "vs-minimal",
+    "workbench.colorTheme": "One Dark Pro",
+    "vscode_custom_css.imports": [   
+        "file:///home/skelviper/Documents/setting/setting.css",
+        "file:///home/skelviper/Documents/setting/setting.js"
+      ], 
+      "vscode_custom_css.policy": true
+}
+
