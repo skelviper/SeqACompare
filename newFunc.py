@@ -1,37 +1,81 @@
 import tkinter
+ 
+class Gui(object):
+    def __init__(self):
+        self.root = tkinter.Tk()
+        self.root.geometry("320x400+800+400")
+        self.root.title('自动发送邮件')
+        # 标签控件
+        # 邮件号
+        self.label_yj = tkinter.Label(master=self.root, text='邮件号:')
+        self.label_yj.grid(row=0, column=0)
+        # 间谍号
+        self.label_jd = tkinter.Label(master=self.root, text='间谍号:')
+        self.label_jd.grid(row=1, column=0)
+        # 目标群
+        self.label_mb = tkinter.Label(master=self.root, text='目标群:')
+        self.label_mb.grid(row=2, column=0)
+        # 授权码
+        self.label_sq = tkinter.Label(master=self.root, text='授权码:')
+        self.label_sq.grid(row=3, column=0)
+        # 邮件标题
+        self.label_bt = tkinter.Label(master=self.root, text='邮件标题:')
+        self.label_bt.grid(row=4, column=0)
+        # 邮件内容
+        self.label_nr = tkinter.Label(master=self.root, text='邮件内容:')
+        self.label_nr.grid(row=5, column=0)
+        # 发送记录
+        self.label = tkinter.Label(master=self.root, text='发送记录:')
+        self.label.grid(row=7, column=0)
+ 
+        # 输入控件
+        # 邮件号
+        self.entry_yj = tkinter.Entry(master=self.root)
+        self.entry_yj.grid(row=0, column=1)
+        # 间谍号
+        self.entry_jd = tkinter.Entry(master=self.root)
+        self.entry_jd.grid(row=1, column=1)
+        # 目标群
+        self.entry_mb = tkinter.Entry(master=self.root)
+        self.entry_mb.grid(row=2, column=1)
+        # 授权码
+        self.entry_sq = tkinter.Entry(master=self.root)
+        self.entry_sq.grid(row=3, column=1)
+        # 邮件标题
+        self.entry_bt = tkinter.Entry(master=self.root)
+        self.entry_bt.grid(row=4, column=1)
+        # 邮件内容
+        self.entry_nr = tkinter.Entry(master=self.root)
+        self.entry_nr.grid(row=5, column=1)
+ 
+        # 按钮控件
+        # 提交信息按钮
+        #self.button_tj = tkinter.Button(master=self.root, text='开始运行', command=)
+        #self.button_tj.grid(row=6, column=0)
+        # 停止按钮(command=self.root.quit  关闭窗口)
+        self.button_tz = tkinter.Button(master=self.root, text='停止发送', command=self.root.quit)
+        self.button_tz.grid(row=6, column=1)
+        # 清空内容(command=self.delete    清空当前窗口的所有内容)
+        self.button_tz = tkinter.Button(master=self.root, text='清空', command=self.delete)
+        self.button_tz.grid(row=6, column=2)
+ 
+        # 列表框控件(输出结果)
+        self.listbox = tkinter.Listbox(master=self.root, width=45, height=10)
+        self.listbox.grid(rowspan=4, columnspan=4)
+ 
+        self.root.mainloop()
+ 
+    # 清空输入框
+    def delete(self):
+        self.entry_yj.delete(0, 'end')
+        self.entry_jd.delete(0, 'end')
+        self.entry_mb.delete(0, 'end')
+        self.entry_sq.delete(0, 'end')
+        self.entry_bt.delete(0, 'end')
+        #self.eneftry_nr.delete(0, 'end')
+        print("work")
+    
+    #zai 
 
-wuya = tkinter.Tk()
-wuya.title("wuya")
-wuya.geometry("300x50+10+20")
 
-# 创建滚动条
-scroll = tkinter.Scrollbar()
-# 创建文本框text，设置宽度100，high不是高度，是文本显示的行数设置为3行
-text = tkinter.Text(wuya)
-# 将滚动条填充
-scroll.pack(side=tkinter.RIGHT,fill=tkinter.Y) # side是滚动条放置的位置，上下左右。fill是将滚动条沿着y轴填充
-text.pack(side=tkinter.LEFT,fill=tkinter.Y) # 将文本框填充进wuya窗口的左侧，
-# 将滚动条与文本框关联
-scroll.config(command=text.yview) # 将文本框关联到滚动条上，滚动条滑动，文本框跟随滑动
-text.config(yscrollcommand=scroll.set) # 将滚动条关联到文本框
-
-# 设置文本框内容
-txt = 'China urges the U.S. to abide by the one-China principle and the principles of the three Sino-U.S.' \
-      ' Joint Communiques, and stop all forms of military contact with Taiwan including arms sales, Wu said.'
-# 将文本内容插入文本框
-text.insert('insert',txt)
-
-
-
-wuya.mainloop()
-
-
- root = tk.Tk()
->>> text = tk.Text(root)
->>> text.pack(side=tk.LEFT)
->>> scrollbar = tk.Scrollbar(root, command=text.yview)
->>> text.config(yscrollcommand=scrollbar.set)
->>> scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
->>> text.config(width=24)
->>> for i in range(300):
-...     text.insert(tk.END, str(i))
+Gui()
