@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import scrolledtext
+from tkinter import scrolledtext,Text
 from tkinter import INSERT
 import sys
 
@@ -15,8 +15,7 @@ class MainGUI(object):
         tk.Label(self.window, text='Original Sequence',font = ('Arial',20)).pack()
         
         self.seqOri = scrolledtext.ScrolledText(self.window,height = 5,width =100)
-        #seqOri = tk.Text(self,height = 5,width =100)
-        #输入输出框的滚轮实现
+        #通过scrolledtext实现滚轮，继承自Text类
         self.seqOri.pack()
 
         tk.Label(self.window, text='Sequencing Result',font = ('Arial',20)).pack()
@@ -44,13 +43,30 @@ class MainGUI(object):
         self.ResOutput.delete("0.0","end")
 
         print("All clear!")
-
-    def align(self):
-        pass
         
     def redirector(self,inputStr):
         self.ResOutput.insert(INSERT, inputStr)
 
+    def align(self):
+        print(MainGUI.readFasta(self.seqRes))
+
+    #readFasta将每个fasta格式的序列内容保存为列表里的一个元素
+    @staticmethod
+    def readFasta(Text):
+        try:
+            seq = []
+            seqNum = -1
+            tempText = Text.get("0.0","end").split()
+            for line in tempText:
+                if (line[0]=='>'):
+                    seqNum +=1
+                    seq.append("")
+                    continue
+                else:
+                    seq[seqNum]+=line
+            return seq
+        except BaseException:
+            print("WrongInput")
 
 
 if __name__ == '__main__':
