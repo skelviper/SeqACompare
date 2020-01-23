@@ -183,11 +183,11 @@ class smithWaterman:
         align1 = align1[::-1]    #reverse sequence 1
         align2 = align2[::-1]    #reverse sequence 2
 
-        i,j = 0,0
+        i = 0,0
 
         #输出结果: alignment 
         symbol = ''
-        identity = 0
+        #identity = 0
         for i in range(0,len(align1)):
             # if two AAs are the same, then output the letter
             if (align1[i] == align2[i]):                
