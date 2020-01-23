@@ -10,9 +10,66 @@ class function:
         return ReverseSeq
 
     @staticmethod
-    def seqAlign(seq1,seq2):
-        print(smithWaterman.water(seq1,seq2))
-    
+    def seqAlign(listOri,listRes):
+        #listOri:["Oriseq"],listRes:["Fseq","Rseq"]
+        #step1:get the Reverse compliment of Rseq
+        listRes[1] = function.reverseCompliment(listRes[1])
+        #step2: Assemble Fseq and Rseq
+
+        list = smithWaterman.water(listRes[0],listRes[1])
+        #list [align1,align2,symbol,maxscore]
+        seqExpand1 = ""
+        seqExpand2 = ""
+        sign = ""
+
+        seqExpand1+="-"*listRes[1].find(list[1])
+        seqExpand2+="-"*listRes[0].find(list[0])
+        seqExpand1 += listRes[0]
+        seqExpand2 += listRes[1]
+        sign += "-"*(listRes[1].find(list[1])+listRes[0].find(list[0]))
+        sign += list[2]
+
+        maxLength = max(len(seqExpand1),len(seqExpand2))
+        seqExpand1 +="-"*(maxLength-len(seqExpand1))
+        seqExpand2 +="-"*(maxLength-len(seqExpand2))
+        sign += "-"*(maxLength-len(sign))
+
+        print("Sequencing Result")
+        print(seqExpand1)
+        print(seqExpand2)
+        print(sign)
+
+        seqConsensus = ""
+        #将两个seqExpand 合并成一个seqConsensus：
+        for i,j in zip(seqExpand1,seqExpand2):
+            if (i==j):
+                seqConsensus +=i
+            elif (i == '-'):
+                seqConsensus += j
+            elif (j == '-'):
+                seqConsensus += i
+            elif (i == 'N' or j == 'N'):
+                seqConsensus += "N"
+            else:
+                seqConsensus += "M"
+
+        #print(seqConsensus)
+        print("Original Seq:")
+        print(listOri[0])
+        print("AlignResult:")
+        list2 = smithWaterman.water(seqConsensus,listOri[0])
+        print(list2[0])
+        print(list2[1])
+        print(list2[2])
+
+        '''
+        Output：
+            1. SeqF align with ReverseCompliment Format seqR
+            2. Consensus Sequence
+            3. Original sequence
+            4. align result
+        '''
+
 
 
 class smithWaterman:

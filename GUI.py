@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import scrolledtext,Text
 from tkinter import INSERT
 import sys
+from fun import *
 
 class MainGUI(object):
     def __init__(self):
@@ -48,7 +49,10 @@ class MainGUI(object):
         self.ResOutput.insert(INSERT, inputStr)
 
     def align(self):
-        print(MainGUI.readFasta(self.seqRes))
+        self.ResOutput.delete("0.0","end")
+        listRes = MainGUI.readFasta(self.seqRes)
+        listOri = MainGUI.readFasta(self.seqOri)
+        function.seqAlign(listOri,listRes)
 
     #readFasta将每个fasta格式的序列内容保存为列表里的一个元素
     @staticmethod
