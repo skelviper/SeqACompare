@@ -60,7 +60,7 @@ class MainGUI(object):
         try:
             seq = []
             seqNum = -1
-            tempText = Text.get("0.0","end").split()
+            tempText = Text.get("0.0","end").splitlines()
             for line in tempText:
                 if (line[0]=='>'):
                     seqNum +=1
@@ -68,6 +68,10 @@ class MainGUI(object):
                     continue
                 else:
                     seq[seqNum]+=line
+
+            #temp
+            #print(seq)
+
             return seq
         except BaseException:
             print("WrongInput")
